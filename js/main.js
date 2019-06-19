@@ -1,6 +1,6 @@
 'use strict';
 
-var types = ['palace', 'flat', 'house','bungalo'];
+var types = ['palace', 'flat', 'house', 'bungalo'];
 var map = document.querySelector('.map');
 var mapPins = map.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -11,7 +11,7 @@ var getRandomElement = function (array) {
 
 var getRandomInteger = function (min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
-}
+};
 
 var showElement = function (element, classHidden) {
   document.querySelector(element).classList.remove(classHidden);
@@ -42,8 +42,6 @@ var getAds = function () {
   return ads;
 };
 
-var ads = getAds();
-
 var renderPin = function (ad) {
   var pinElement = pinTemplate.cloneNode(true);
   pinElement.style.left = ad.location.x + 'px';
@@ -54,14 +52,15 @@ var renderPin = function (ad) {
   return pinElement;
 };
 
-var renderPins = function (ads) {
+var renderPins = function (array) {
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < ads.length; i++) {
-    fragment.appendChild(renderPin(ads[i]));
+  for (var i = 0; i < array.length; i++) {
+    fragment.appendChild(renderPin(array[i]));
   }
   mapPins.appendChild(fragment);
 };
 
+var ads = getAds();
 renderPins(ads);
 
 showElement('.map.map--faded', 'map--faded');
