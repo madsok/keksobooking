@@ -1,29 +1,46 @@
 'use strict';
 
 var types = ['palace', 'flat', 'house','bungalo'];
+var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
 
+var getRandomInteger = function (min, max) {
+  return Math.floor(min + Math.random() * (max + 1 - min));
+}
 
+var showElement = function (element, classHidden) {
+  document.querySelector(element).classList.remove(classHidden);
+};
 
 var getAd = function () {
-  for (i = 0; i < 8; i++);
+  for (var i = 1; i < 9; i++);
   var ad = {
     author: {
-      avatar: 'img/avatars/user0' + (i + 1) + '.png'
+      avatar: 'img/avatars/user0' + i + '.png'
     },
     offer: {
       type: getRandomElement(types)
     },
 
     location: {
-      x: случайное число, координата x метки на карте. Значение ограничено размерами блока, в котором перетаскивается метка.
-      y: случайное число, координата y метки на карте от 130 до 630.
+      x: getRandomInteger(0, 1200),
+      y: getRandomInteger(130, 160)
     }
-  }
+  };
+  return ad;
 };
 
+var getAds = function () {
+  var ads = [];
+  for (var i = 0; i < 8; i++) {
+    ads[i] = getAd();
+  }
+  return ads;
+};
 
-console.log('img/avatars/user' + '0' + 'i' + '.png')
+var ads = getAds();
+
+showElement('.map.map--faded', '.map--faded');
