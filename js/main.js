@@ -1,6 +1,7 @@
 'use strict';
 
 var types = ['palace', 'flat', 'house', 'bungalo'];
+var avatarURL = 'img/avatars/user';
 var map = document.querySelector('.map');
 var mapPins = map.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -25,7 +26,7 @@ var showElement = function (element, classHidden) {
 var getAd = function (i) {
   var ad = {
     author: {
-      avatar: 'img/avatars/user0' + i + '.png'
+      avatar: i < 10 ? avatarURL + '0' + i + '.png' : avatarURL + i + '.png'
     },
     offer: {
       type: getRandomElement(types)
