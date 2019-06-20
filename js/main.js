@@ -48,8 +48,6 @@ var getAds = function () {
   return ads;
 };
 
-console.log(getAds());
-
 var renderPin = function (ad) {
   var pinElement = pinTemplate.cloneNode(true);
   pinElement.style.left = ad.location.x + 'px';
