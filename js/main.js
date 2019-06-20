@@ -4,6 +4,11 @@ var types = ['palace', 'flat', 'house', 'bungalo'];
 var map = document.querySelector('.map');
 var mapPins = map.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var LOCATION_X_X = 50;
+var LOCATION_X_Y = 1150;
+var LOCATION_Y_X = 130;
+var LOCATION_Y_Y = 630;
+var ADS_LENGTH = 8;
 
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -27,8 +32,8 @@ var getAd = function (i) {
     },
 
     location: {
-      x: getRandomInteger(50, 1150),
-      y: getRandomInteger(130, 630)
+      x: getRandomInteger(LOCATION_X_X, LOCATION_X_Y),
+      y: getRandomInteger(LOCATION_Y_X, LOCATION_Y_Y)
     }
   };
   return ad;
@@ -36,11 +41,13 @@ var getAd = function (i) {
 
 var getAds = function () {
   var ads = [];
-  for (var i = 1, j = 0; i < 9; i++, j++) {
-    ads[j] = getAd(i);
+  for (var i = 0; i < ADS_LENGTH; i++) {
+    ads[i] = getAd(i + 1);
   }
   return ads;
 };
+
+console.log(getAds());
 
 var renderPin = function (ad) {
   var pinElement = pinTemplate.cloneNode(true);
