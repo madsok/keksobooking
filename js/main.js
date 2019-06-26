@@ -67,6 +67,40 @@ var renderPins = function (array) {
 };
 
 var ads = getAds();
-renderPins(ads);
 
-showElement('.map.map--faded', 'map--faded');
+//  подробности//
+
+var adForm = document.querySelector('.ad-form');
+var adFormFieldsets = adForm.querySelectorAll('fieldset');
+var mapPinMain = document.querySelector('.map__pin--main');
+var mapFilters = document.querySelector('.map__filters');
+var mapFiltersSelects = mapFilters.querySelectorAll('select');
+var mapFiltersFieldests = mapFilters.querySelectorAll('fieldset');
+
+var addAttribute = function (pseudoElements) {
+  for (var i = 0; i < pseudoElements.length; i++) {
+    pseudoElements[i].setAttribute('disabled', 'disabled');
+  }
+};
+
+var removeAttribute = function (pseudoElements) {
+  for (var i = 0; i < pseudoElements.length; i++) {
+    pseudoElements[i].removeAttribute('disabled');
+  }
+};
+
+addAttribute(adFormFieldsets);
+addAttribute(mapFiltersSelects);
+addAttribute(mapFiltersFieldests);
+
+
+var onPinClick = function () {
+  showElement('.map', 'map--faded');
+  renderPins(ads);
+  showElement('.ad-form', 'ad-form--disabled');
+  removeAttribute(adFormFieldsets);
+  removeAttribute(mapFiltersSelects);
+  removeAttribute(mapFiltersFieldests);
+};
+
+mapPinMain.addEventListener('click', onPinClick);
