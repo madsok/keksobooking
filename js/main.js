@@ -76,6 +76,7 @@ var mapPinMain = document.querySelector('.map__pin--main');
 var mapFilters = document.querySelector('.map__filters');
 var mapFiltersSelects = mapFilters.querySelectorAll('select');
 var mapFiltersFieldests = mapFilters.querySelectorAll('fieldset');
+var address = adForm.querySelector('#address');
 
 var addAttribute = function (pseudoElements) {
   for (var i = 0; i < pseudoElements.length; i++) {
@@ -88,6 +89,16 @@ var removeAttribute = function (pseudoElements) {
     pseudoElements[i].removeAttribute('disabled');
   }
 };
+
+var offset = function (element) {
+    var rect = element.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+}
+
+var element = offset(mapPinMain);
+console.log(element.left , element.top);
 
 addAttribute(adFormFieldsets);
 addAttribute(mapFiltersSelects);
@@ -103,4 +114,7 @@ var onPinClick = function () {
   removeAttribute(mapFiltersFieldests);
 };
 
+mapPinMain.addEventListener('mouseup', function () {
+  address.value = element.left element.top ;
+});
 mapPinMain.addEventListener('click', onPinClick);
