@@ -90,15 +90,8 @@ var removeAttribute = function (pseudoElements) {
   }
 };
 
-var offset = function (element) {
-    var rect = element.getBoundingClientRect(),
-    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
-    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
-}
-
-var element = offset(mapPinMain);
-console.log(element.left , element.top);
+var rect = mapPinMain.getBoundingClientRect();
+var coords = rect.x + ', ' + rect.y;
 
 addAttribute(adFormFieldsets);
 addAttribute(mapFiltersSelects);
@@ -115,6 +108,6 @@ var onPinClick = function () {
 };
 
 mapPinMain.addEventListener('mouseup', function () {
-  address.value = element.left element.top ;
+  address.value = coords;
 });
 mapPinMain.addEventListener('click', onPinClick);
