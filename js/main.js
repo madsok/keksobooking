@@ -1,15 +1,16 @@
 'use strict';
 
-var types = ['palace', 'flat', 'house', 'bungalo'];
-var avatarURL = 'img/avatars/user';
-var map = document.querySelector('.map');
-var mapPins = map.querySelector('.map__pins');
-var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var LOCATION_X_X = 50;
 var LOCATION_X_Y = 1150;
 var LOCATION_Y_X = 130;
 var LOCATION_Y_Y = 630;
 var ADS_LENGTH = 8;
+var MAP_PIN_MAIN_COORDS = '570, 375';
+var types = ['palace', 'flat', 'house', 'bungalo'];
+var avatarURL = 'img/avatars/user';
+var map = document.querySelector('.map');
+var mapPins = map.querySelector('.map__pins');
+var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -90,9 +91,6 @@ var removeAttribute = function (pseudoElements) {
   }
 };
 
-var rect = mapPinMain.getBoundingClientRect();
-var coords = rect.x + ', ' + rect.y;
-
 addAttribute(adFormFieldsets);
 addAttribute(mapFiltersSelects);
 addAttribute(mapFiltersFieldests);
@@ -107,7 +105,9 @@ var onPinClick = function () {
   removeAttribute(mapFiltersFieldests);
 };
 
+address.value = MAP_PIN_MAIN_COORDS;
+
 mapPinMain.addEventListener('mouseup', function () {
-  address.value = coords;
+  address.value = MAP_PIN_MAIN_COORDS;
 });
 mapPinMain.addEventListener('click', onPinClick);
