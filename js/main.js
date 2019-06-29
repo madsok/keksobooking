@@ -1,15 +1,25 @@
 'use strict';
 
-var types = ['palace', 'flat', 'house', 'bungalo'];
-var avatarURL = 'img/avatars/user';
-var map = document.querySelector('.map');
-var mapPins = map.querySelector('.map__pins');
-var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var LOCATION_X_X = 50;
 var LOCATION_X_Y = 1150;
 var LOCATION_Y_X = 130;
 var LOCATION_Y_Y = 630;
 var ADS_LENGTH = 8;
+var MAP_PIN_MAIN_COORDS = '570, 375';
+var types = ['palace', 'flat', 'house', 'bungalo'];
+var avatarURL = 'img/avatars/user';
+var map = document.querySelector('.map');
+var mapPins = map.querySelector('.map__pins');
+var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+
+var adForm = document.querySelector('.ad-form');
+var adFormFieldsets = adForm.querySelectorAll('fieldset');
+var mapPinMain = document.querySelector('.map__pin--main');
+var mapFilters = document.querySelector('.map__filters');
+var mapFiltersSelects = mapFilters.querySelectorAll('select');
+var mapFiltersFieldests = mapFilters.querySelectorAll('fieldset');
+var address = adForm.querySelector('#address');
+
 
 var getRandomElement = function (array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -67,6 +77,45 @@ var renderPins = function (array) {
 };
 
 var ads = getAds();
-renderPins(ads);
 
-showElement('.map.map--faded', 'map--faded');
+//  подробности//
+
+var addAttribute = function (pseudoElements) {
+  for (var i = 0; i < pseudoElements.length; i++) {
+    pseudoElements[i].setAttribute('disabled', 'disabled');
+  }
+};
+
+var removeAttribute = function (pseudoElements) {
+  for (var i = 0; i < pseudoElements.length; i++) {
+    pseudoElements[i].removeAttribute('disabled');
+  }
+};
+
+var activateForm = function () {
+  removeAttribute(adFormFieldsets);
+  removeAttribute(mapFiltersSelects);
+  removeAttribute(mapFiltersFieldests);
+};
+
+var disableForm = function () {
+  addAttribute(adFormFieldsets);
+  addAttribute(mapFiltersSelects);
+  addAttribute(mapFiltersFieldests);
+};
+
+var onPinClick = function () {
+  showElement('.map', 'map--faded');
+  renderPins(ads);
+  showElement('.ad-form', 'ad-form--disabled');
+  activateForm();
+};
+
+disableForm();
+
+address.value = MAP_PIN_MAIN_COORDS;
+
+mapPinMain.addEventListener('mouseup', function () {
+  address.value = MAP_PIN_MAIN_COORDS;
+});
+mapPinMain.addEventListener('click', onPinClick);
