@@ -11,6 +11,16 @@ var avatarURL = 'img/avatars/user';
 var map = document.querySelector('.map');
 var mapPins = map.querySelector('.map__pins');
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var adFormTitle = document.querySelector('#title');
+var adFormPrice = document.querySelector('#price');
+var adFormType = document.querySelector('#type');
+var typesMinPrices = {
+  'palace': 10000,
+  'house': 5000,
+  'flat': 1000,
+  'bungalo': 0
+};
+
 
 var adForm = document.querySelector('.ad-form');
 var adFormFieldsets = adForm.querySelectorAll('fieldset');
@@ -119,3 +129,26 @@ mapPinMain.addEventListener('mouseup', function () {
   address.value = MAP_PIN_MAIN_COORDS;
 });
 mapPinMain.addEventListener('click', onPinClick);
+
+
+adFormTitle.addEventListener('invalid', function () {
+  if (adFormTitle.validity.tooShort) {
+    adFormTitle.setCustomValidity('Минимальная длина — 30 символов');
+  } else if (adFormTitle.validity.tooLong) {
+    adFormTitle.setCustomValidity('Максимальная длина — 100 символов');
+  } else if (adFormTitle.validity.valueMissing) {
+    adFormTitle.setCustomValidity('Обязательное поле');
+  } else {
+    adFormTitle.setCustomValidity('');
+  }
+});
+
+adFormPrice.addEventListener('invalid', function () {
+  if (adFormPrice.validity.rangeOverflow) {
+    adFormPrice.setCustomValidity('Максимальная цена — 1 000 000');
+  } else if (adFormPrice.validity.valueMissing) {
+    adFormPrice.setCustomValidity('Обязательное поле');
+  } else {
+    adFormPrice.setCustomValidity('');
+  }
+});
