@@ -14,11 +14,13 @@ var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pi
 var adFormTitle = document.querySelector('#title');
 var adFormPrice = document.querySelector('#price');
 var adFormType = document.querySelector('#type');
+var adFormTimeIn = document.querySelector('#timein');
+var adFormTimeOut = document.querySelector('#timeout');
 var typesMinPrices = {
-  'palace': 10000,
-  'house': 5000,
-  'flat': 1000,
-  'bungalo': 0
+  palace: 10000,
+  house: 5000,
+  flat: 1000,
+  bungalo: 0
 };
 
 
@@ -121,6 +123,12 @@ var onPinClick = function () {
   activateForm();
 };
 
+var getPriceByType = function (evt) {
+  var onSelectType = typesMinPrices[evt.target.value];
+  adFormPrice.min = onSelectType;
+  adFormPrice.placeholder = onSelectType;
+};
+
 disableForm();
 
 address.value = MAP_PIN_MAIN_COORDS;
@@ -151,4 +159,14 @@ adFormPrice.addEventListener('invalid', function () {
   } else {
     adFormPrice.setCustomValidity('');
   }
+});
+
+adFormType.addEventListener('change', getPriceByType);
+
+adFormTimeIn.addEventListener('change', function (evt) {
+  adFormTimeOut.value = evt.target.value;
+});
+
+adFormTimeOut.addEventListener('change', function (evt) {
+  adFormTimeIn.value = evt.target.value;
 });
