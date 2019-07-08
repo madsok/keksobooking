@@ -35,7 +35,7 @@ var mapPinMainSize = {
   width: 65,
   height: 65
 };
-var mapPinMainAfterHeight = 22;
+var mapPinMainAfterHeight = 14;
 
 var limits = {
   top: 130,
@@ -178,10 +178,10 @@ mapPinMain.addEventListener('mousedown', function (evt) {
       mapPinMainCoords.x = limits.right - mapPinMainSize.width;
     }
 
-    if (mapPinMainCoords.y < limits.top) {
-      mapPinMainCoords.y = limits.top;
-    } else if (mapPinMainCoords.y > limits.bottom) {
-      mapPinMainCoords.y = limits.bottom;
+    if (mapPinMainCoords.y < limits.top - mapPinMainSize.height - mapPinMainAfterHeight) {
+      mapPinMainCoords.y = limits.top - mapPinMainSize.height - mapPinMainAfterHeight;
+    } else if (mapPinMainCoords.y > limits.bottom - mapPinMainSize.height - mapPinMainAfterHeight) {
+      mapPinMainCoords.y = limits.bottom - mapPinMainSize.height - mapPinMainAfterHeight;
     }
 
     var mapPinMainAfterCoords = {
