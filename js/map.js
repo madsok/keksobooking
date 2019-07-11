@@ -32,28 +32,28 @@
     mapPins.appendChild(fragment);
   };
 
-  var addAttribute = function (pseudoElements) {
-    for (var i = 0; i < pseudoElements.length; i++) {
-      pseudoElements[i].setAttribute('disabled', 'disabled');
+  var disableField = function (pseudoArray) {
+    for (var i = 0; i < pseudoArray.length; i++) {
+      pseudoArray[i].setAttribute('disabled', 'disabled');
     }
   };
 
-  var removeAttribute = function (pseudoElements) {
-    for (var i = 0; i < pseudoElements.length; i++) {
-      pseudoElements[i].removeAttribute('disabled');
+  var enableField = function (pseudoArray) {
+    for (var i = 0; i < pseudoArray.length; i++) {
+      pseudoArray[i].removeAttribute('disabled');
     }
   };
 
   window.activateForm = function () {
-    removeAttribute(adFormFieldsets);
-    removeAttribute(mapFiltersSelects);
-    removeAttribute(mapFiltersFieldests);
+    enableField(adFormFieldsets);
+    enableField(mapFiltersSelects);
+    enableField(mapFiltersFieldests);
   };
 
   var disableForm = function () {
-    addAttribute(adFormFieldsets);
-    addAttribute(mapFiltersSelects);
-    addAttribute(mapFiltersFieldests);
+    disableField(adFormFieldsets);
+    disableField(mapFiltersSelects);
+    disableField(mapFiltersFieldests);
   };
 
   disableForm();

@@ -9,14 +9,6 @@
   var types = ['palace', 'flat', 'house', 'bungalo'];
   var avatarURL = 'img/avatars/user';
 
-  var getRandomElement = function (array) {
-    return array[Math.floor(Math.random() * array.length)];
-  };
-
-  var getRandomInteger = function (min, max) {
-    return Math.floor(min + Math.random() * (max + 1 - min));
-  };
-
   var getAd = function (i) {
     var ad = {
       author: {
