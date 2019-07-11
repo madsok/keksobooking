@@ -15,12 +15,12 @@
         avatar: i < 10 ? avatarURL + '0' + i + '.png' : avatarURL + i + '.png'
       },
       offer: {
-        type: getRandomElement(types)
+        type: window.getRandomElement(types)
       },
 
       location: {
-        x: getRandomInteger(LOCATION_X_X, LOCATION_X_Y),
-        y: getRandomInteger(LOCATION_Y_X, LOCATION_Y_Y)
+        x: window.getRandomInteger(LOCATION_X_X, LOCATION_X_Y),
+        y: window.getRandomInteger(LOCATION_Y_X, LOCATION_Y_Y)
       }
     };
     return ad;
