@@ -32,15 +32,15 @@
     mapPins.appendChild(fragment);
   };
 
-  var disableField = function (pseudoArray) {
-    for (var i = 0; i < pseudoArray.length; i++) {
-      pseudoArray[i].setAttribute('disabled', 'disabled');
+  var disableField = function (elements) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].setAttribute('disabled', 'disabled');
     }
   };
 
-  var enableField = function (pseudoArray) {
-    for (var i = 0; i < pseudoArray.length; i++) {
-      pseudoArray[i].removeAttribute('disabled');
+  var enableField = function (elements) {
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].removeAttribute('disabled');
     }
   };
 
