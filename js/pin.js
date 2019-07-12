@@ -3,7 +3,7 @@
 (function () {
 
   var mapPinMain = document.querySelector('.map__pin--main');
-  var address = window.adForm.querySelector('#address');
+  var address = window.map.adForm.querySelector('#address');
   var mapPinMainSize = {
     width: 65,
     height: 65
