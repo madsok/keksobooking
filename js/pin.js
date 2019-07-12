@@ -18,10 +18,10 @@
   };
 
   var onPinClick = function () {
-    window.showElement('.map', 'map--faded');
-    window.renderPins(window.ads);
-    window.showElement('.ad-form', 'ad-form--disabled');
-    window.activateForm();
+    window.map.showElement('.map', 'map--faded');
+    window.map.renderPins(window.ads);
+    window.map.showElement('.ad-form', 'ad-form--disabled');
+    window.map.activateForm();
   };
 
   address.value = mapPinMain.offsetLeft + ',' + mapPinMain.offsetTop;
