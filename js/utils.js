@@ -2,7 +2,7 @@
 
 (function () {
 
-  window.util = {
+  window.utils = {
     getRandomElement: function (array) {
       return array[Math.floor(Math.random() * array.length)];
     },
