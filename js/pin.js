@@ -16,10 +16,10 @@
     bottom: 630,
     left: 0
   };
+  var data = false;
 
   var onPinClick = function () {
     window.map.showElement('.map', 'map--faded');
-    window.map.renderPins(window.ads);
     window.map.showElement('.ad-form', 'ad-form--disabled');
     window.map.activateForm();
   };
@@ -28,6 +28,10 @@
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
+    if (!data) {
+      window.map.renderPins(window.ads);
+      data = true;
+    }
     onPinClick();
 
     var startCoords = {
@@ -81,9 +85,7 @@
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-
     };
-
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 
