@@ -26,17 +26,19 @@
     }
   };
   var adFormFieldsets = window.map.adForm.querySelectorAll('fieldset');
-  var onSuccess = function (data) {
-   window.ads = data;
- };
- var main = document.querySelector('main');
- var errorTemplate = document.querySelector('#error').content.querySelector('.error');
- var onError = function () {
-   var errorMessage = errorTemplate.cloneNode(true);
-   main.appendChild(errorMessage);
- };
+  var main = document.querySelector('main');
+  var errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
- window.load (onSuccess, onError);
+
+  var onSuccess = function (data) {
+    window.ads = data;
+  };
+  var onError = function () {
+    var errorMessage = errorTemplate.cloneNode(true);
+    main.appendChild(errorMessage);
+  };
+
+  window.load(onSuccess, onError);
 
   var renderPin = function (ad) {
     var pinElement = pinTemplate.cloneNode(true);
