@@ -16,19 +16,23 @@
     bottom: 630,
     left: 0
   };
+  var data = false;
 
-  var onPinClick = function () {
+  var showPins = function () {
     window.map.showElement('.map', 'map--faded');
-    window.map.renderPins(window.ads);
     window.map.showElement('.ad-form', 'ad-form--disabled');
     window.map.activateForm();
   };
 
   address.value = mapPinMain.offsetLeft + ',' + mapPinMain.offsetTop;
 
-  mapPinMain.addEventListener('mousedown', function (evt) {
+  var onMapPinMainClick = function (evt) {
     evt.preventDefault();
-    onPinClick();
+    showPins();
+    if (!data) {
+      window.load(window.map.data, window.onError);
+      data = true;
+    }
 
     var startCoords = {
       x: evt.clientX,
@@ -81,12 +85,11 @@
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-
     };
-
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 
-  });
+  };
+  mapPinMain.addEventListener('mousedown', onMapPinMainClick);
 
 }());

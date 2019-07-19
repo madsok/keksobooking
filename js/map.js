@@ -9,6 +9,9 @@
   var mapFiltersFieldests = mapFilters.querySelectorAll('fieldset');
   window.map = {
     adForm: document.querySelector('.ad-form'),
+    data: function (data) {
+      window.map.renderPins(data);
+    },
     renderPins: function (array) {
       var fragment = document.createDocumentFragment();
       for (var i = 0; i < array.length; i++) {
@@ -32,7 +35,7 @@
     pinElement.style.left = ad.location.x + 'px';
     pinElement.style.top = ad.location.y + 'px';
     pinElement.querySelector('img').src = ad.author.avatar;
-    pinElement.querySelector('img').alt = 'Заголовок объявления';
+    pinElement.querySelector('img').alt = ad.offer.title;
 
     return pinElement;
   };
