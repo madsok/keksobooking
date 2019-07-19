@@ -18,7 +18,7 @@
   };
   var data = false;
 
-  var onPinClick = function () {
+  var showPins = function () {
     window.map.showElement('.map', 'map--faded');
     window.map.showElement('.ad-form', 'ad-form--disabled');
     window.map.activateForm();
@@ -26,13 +26,13 @@
 
   address.value = mapPinMain.offsetLeft + ',' + mapPinMain.offsetTop;
 
-  mapPinMain.addEventListener('mousedown', function (evt) {
+  var onMapPinMainClick = function (evt) {
     evt.preventDefault();
+    showPins();
     if (!data) {
-      window.map.renderPins(window.ads);
+      window.load(window.map.data, window.onError);
       data = true;
     }
-    onPinClick();
 
     var startCoords = {
       x: evt.clientX,
@@ -89,6 +89,7 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 
-  });
+  };
+  mapPinMain.addEventListener('mousedown', onMapPinMainClick);
 
 }());

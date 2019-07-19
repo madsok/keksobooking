@@ -9,6 +9,9 @@
   var mapFiltersFieldests = mapFilters.querySelectorAll('fieldset');
   window.map = {
     adForm: document.querySelector('.ad-form'),
+    data: function (data) {
+      window.map.renderPins(data);
+    },
     renderPins: function (array) {
       var fragment = document.createDocumentFragment();
       for (var i = 0; i < array.length; i++) {
@@ -26,19 +29,6 @@
     }
   };
   var adFormFieldsets = window.map.adForm.querySelectorAll('fieldset');
-  var main = document.querySelector('main');
-  var errorTemplate = document.querySelector('#error').content.querySelector('.error');
-
-
-  var onSuccess = function (data) {
-    window.ads = data;
-  };
-  var onError = function () {
-    var errorMessage = errorTemplate.cloneNode(true);
-    main.appendChild(errorMessage);
-  };
-
-  window.load(onSuccess, onError);
 
   var renderPin = function (ad) {
     var pinElement = pinTemplate.cloneNode(true);
