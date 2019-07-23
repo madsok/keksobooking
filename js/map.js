@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var PINS_LIMIT = 5;
   var map = document.querySelector('.map');
   var mapPins = map.querySelector('.map__pins');
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
@@ -10,7 +11,12 @@
   window.map = {
     adForm: document.querySelector('.ad-form'),
     data: function (data) {
-      window.map.renderPins(data);
+      window.map.renderPins(data.slice(0, PINS_LIMIT));
+      mapFilters.addEventListener('change', function () {
+        var filteredData = window.filterData(data);
+        window.map.removePins();
+        window.map.renderPins(filteredData);
+      });
     },
     renderPins: function (array) {
       var fragment = document.createDocumentFragment();
@@ -26,6 +32,12 @@
     },
     showElement: function (element, classHidden) {
       document.querySelector(element).classList.remove(classHidden);
+    },
+    removePins: function () {
+      var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+      for (var i = 0; i < pins.length; i++) {
+        pins[i].remove();
+      }
     }
   };
   var adFormFieldsets = window.map.adForm.querySelectorAll('fieldset');
