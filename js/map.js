@@ -15,7 +15,7 @@
       mapFilters.addEventListener('change', function () {
         var filteredData = window.filterData(data);
         window.map.removePins();
-        window.map.renderPins(filteredData);
+        window.map.renderPins(filteredData.slice(0, PINS_LIMIT));
       });
     },
     renderPins: function (array) {
