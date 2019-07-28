@@ -8,6 +8,8 @@
   var mapFilters = document.querySelector('.map__filters');
   var mapFiltersSelects = mapFilters.querySelectorAll('select');
   var mapFiltersFieldests = mapFilters.querySelectorAll('fieldset');
+  var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+  var popupPhotoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
   window.map = {
     adForm: document.querySelector('.ad-form'),
     data: function (data) {
@@ -24,6 +26,7 @@
         fragment.appendChild(renderPin(array[i]));
       }
       mapPins.appendChild(fragment);
+      createCard(array[0]);
     },
     activateForm: function () {
       enableField(adFormFieldsets);
@@ -41,6 +44,12 @@
     }
   };
   var adFormFieldsets = window.map.adForm.querySelectorAll('fieldset');
+  var Types = {
+   PALACE: 'Дворец',
+   HOUSE: 'Дом',
+   FLAT: 'Квартира',
+   BUNGALO: 'Бунгало'
+ };
 
   var renderPin = function (ad) {
     var pinElement = pinTemplate.cloneNode(true);
@@ -51,6 +60,47 @@
 
     return pinElement;
   };
+
+  var createFeatureFragment = function (cardData) {
+    var featureFragment = document.createDocumentFragment();
+    cardData.offer.features.forEach(function (it) {
+      var featureItem = document.createElement('li');
+      featureItem.className = 'popup__feature popup__feature--' + it;
+      featureFragment.appendChild(featureItem);
+    });
+    return featureFragment;
+  };
+
+  var createPhotoFragment = function (cardData) {
+    var photoFragment = document.createDocumentFragment();
+    cardData.offer.photos.forEach(function (it) {
+      var popupPhotoItem = popupPhotoTemplate.cloneNode(true);
+      popupPhotoItem.src = it;
+      photoFragment.appendChild(popupPhotoItem);
+    });
+    return photoFragment;
+  };
+
+
+  var createCard = function (cardData) {
+    var card = cardTemplate.cloneNode(true);
+    card.querySelector('.map__card img').src = cardData.author.avatar;
+    card.querySelector('.popup__title').textContent = cardData.offer.title;
+    card.querySelector('.popup__text--address').textContent = cardData.offer.address;
+    card.querySelector('.popup__text--price').textContent = cardData.offer.price + ' ₽/ночь';
+    card.querySelector('.popup__type').textContent = Types[cardData.offer.type];
+    card.querySelector('.popup__text--capacity').textContent = cardData.offer.rooms + ' комнаты для ' + cardData.offer.guests + ' гостей';
+    card.querySelector('.popup__text--time').textContent = 'Заезд после ' + cardData.offer.checkin + ', выезд до ' + cardData.offer.checkout;
+    card.querySelector('.popup__features').innerHTML = '';
+    card.querySelector('.popup__features').appendChild(createFeatureFragment(cardData));
+    card.querySelector('.popup__description').textContent = cardData.offer.description;
+    card.querySelector('.popup__photos').removeChild(card.querySelector('.popup__photo'));
+    card.querySelector('.popup__photos').appendChild(createPhotoFragment(cardData));
+    mapPins.appendChild(card);
+
+    return card;
+  };
+
 
   var disableField = function (elements) {
     for (var i = 0; i < elements.length; i++) {
