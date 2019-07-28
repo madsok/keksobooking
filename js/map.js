@@ -45,11 +45,11 @@
   };
   var adFormFieldsets = window.map.adForm.querySelectorAll('fieldset');
   var Types = {
-   PALACE: 'Дворец',
-   HOUSE: 'Дом',
-   FLAT: 'Квартира',
-   BUNGALO: 'Бунгало'
- };
+    PALACE: 'Дворец',
+    HOUSE: 'Дом',
+    FLAT: 'Квартира',
+    BUNGALO: 'Бунгало'
+  };
 
   var renderPin = function (ad) {
     var pinElement = pinTemplate.cloneNode(true);
