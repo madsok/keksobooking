@@ -12,12 +12,19 @@
   var popupPhotoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
   window.map = {
     adForm: document.querySelector('.ad-form'),
+    mapCardRemove: function () {
+      var mapCard = map.querySelector('.map__card');
+      if (mapCard) {
+        mapCard.remove();
+      }
+    },
     data: function (data) {
       window.map.renderPins(data.slice(0, PINS_LIMIT));
       mapFilters.addEventListener('change', function () {
         var filteredData = window.filterData(data);
         window.map.removePins();
         window.map.renderPins(filteredData.slice(0, PINS_LIMIT));
+        window.map.mapCardRemove();
       });
     },
     renderPins: function (array) {
@@ -57,10 +64,7 @@
     pinElement.querySelector('img').src = ad.author.avatar;
     pinElement.querySelector('img').alt = ad.offer.title;
     var onPinClick = function () {
-      var mapCard = map.querySelector('.map__card');
-      if (mapCard) {
-        mapCard.remove();
-      }
+      window.map.mapCardRemove();
       createCard(ad);
     };
     pinElement.addEventListener('click', onPinClick);
