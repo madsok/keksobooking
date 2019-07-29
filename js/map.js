@@ -26,7 +26,6 @@
         fragment.appendChild(renderPin(array[i]));
       }
       mapPins.appendChild(fragment);
-      createCard(array[0]);
     },
     activateForm: function () {
       enableField(adFormFieldsets);
@@ -57,6 +56,14 @@
     pinElement.style.top = ad.location.y + 'px';
     pinElement.querySelector('img').src = ad.author.avatar;
     pinElement.querySelector('img').alt = ad.offer.title;
+    var onPinClick = function () {
+    var mapCard = map.querySelector('.map__card');
+    if (mapCard) {
+        mapCard.remove();
+      }
+    createCard(ad);
+    };
+    pinElement.addEventListener('click', onPinClick);
 
     return pinElement;
   };
