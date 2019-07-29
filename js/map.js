@@ -104,6 +104,17 @@
     card.querySelector('.popup__photos').removeChild(card.querySelector('.popup__photo'));
     card.querySelector('.popup__photos').appendChild(createPhotoFragment(cardData));
     mapPins.appendChild(card);
+    var popupClose = card.querySelector('.popup__close');
+    var onPopupCloseClick = function () {
+      card.remove();
+      popupClose.removeEventListener('click', onPopupCloseClick);
+      document.removeEventListener('keydown', onPopupCloseEscDown);
+    };
+    popupClose.addEventListener('click', onPopupCloseClick);
+    var onPopupCloseEscDown = function (evt) {
+      window.utils.onEscDown(evt, onPopupCloseClick);
+    };
+    document.addEventListener('keydown', onPopupCloseEscDown);
 
     return card;
   };
