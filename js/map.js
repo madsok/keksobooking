@@ -57,11 +57,11 @@
     pinElement.querySelector('img').src = ad.author.avatar;
     pinElement.querySelector('img').alt = ad.offer.title;
     var onPinClick = function () {
-    var mapCard = map.querySelector('.map__card');
-    if (mapCard) {
+      var mapCard = map.querySelector('.map__card');
+      if (mapCard) {
         mapCard.remove();
       }
-    createCard(ad);
+      createCard(ad);
     };
     pinElement.addEventListener('click', onPinClick);
 
