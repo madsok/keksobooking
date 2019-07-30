@@ -12,12 +12,19 @@
   var popupPhotoTemplate = document.querySelector('#card').content.querySelector('.popup__photo');
   window.map = {
     adForm: document.querySelector('.ad-form'),
+    mapCardRemove: function () {
+      var mapCard = map.querySelector('.map__card');
+      if (mapCard) {
+        mapCard.remove();
+      }
+    },
     data: function (data) {
       window.map.renderPins(data.slice(0, PINS_LIMIT));
       mapFilters.addEventListener('change', function () {
         var filteredData = window.filterData(data);
         window.map.removePins();
         window.map.renderPins(filteredData.slice(0, PINS_LIMIT));
+        window.map.mapCardRemove();
       });
     },
     renderPins: function (array) {
@@ -26,7 +33,6 @@
         fragment.appendChild(renderPin(array[i]));
       }
       mapPins.appendChild(fragment);
-      createCard(array[0]);
     },
     activateForm: function () {
       enableField(adFormFieldsets);
@@ -57,6 +63,11 @@
     pinElement.style.top = ad.location.y + 'px';
     pinElement.querySelector('img').src = ad.author.avatar;
     pinElement.querySelector('img').alt = ad.offer.title;
+    var onPinClick = function () {
+      window.map.mapCardRemove();
+      createCard(ad);
+    };
+    pinElement.addEventListener('click', onPinClick);
 
     return pinElement;
   };
@@ -97,6 +108,17 @@
     card.querySelector('.popup__photos').removeChild(card.querySelector('.popup__photo'));
     card.querySelector('.popup__photos').appendChild(createPhotoFragment(cardData));
     mapPins.appendChild(card);
+    var popupClose = card.querySelector('.popup__close');
+    var onPopupCloseClick = function () {
+      card.remove();
+      popupClose.removeEventListener('click', onPopupCloseClick);
+      document.removeEventListener('keydown', onPopupCloseEscDown);
+    };
+    popupClose.addEventListener('click', onPopupCloseClick);
+    var onPopupCloseEscDown = function (evt) {
+      window.utils.onEscDown(evt, onPopupCloseClick);
+    };
+    document.addEventListener('keydown', onPopupCloseEscDown);
 
     return card;
   };
