@@ -37,10 +37,10 @@
   };
 
   var onResetClick = function () {
-    window.resetForm();
+    resetForm();
   };
 
-  window.resetForm = function () {
+  var resetForm = function () {
     window.map.adForm.reset();
     window.map.disableForm();
     window.map.hideElement('.map', 'map--faded');
@@ -50,13 +50,14 @@
     window.pin.mapPinMainStartCoords();
     window.pin.address.value = window.pin.mapPinMain.offsetLeft + ',' + window.pin.mapPinMain.offsetTop;
     window.pin.data = false;
+    onRoomNumberChange();
   };
 
   var onAdFormSubmit = function (evt) {
     evt.preventDefault();
     var formData = new FormData(window.map.adForm);
     window.upload(window.onSuccess, window.onError, formData);
-    window.resetForm();
+    resetForm();
   };
 
   adFormTitle.addEventListener('invalid', function () {
