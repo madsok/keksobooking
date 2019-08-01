@@ -39,8 +39,16 @@
       enableField(mapFiltersSelects);
       enableField(mapFiltersFieldests);
     },
+    disableForm: function () {
+      disableField(adFormFieldsets);
+      disableField(mapFiltersSelects);
+      disableField(mapFiltersFieldests);
+    },
     showElement: function (element, classHidden) {
       document.querySelector(element).classList.remove(classHidden);
+    },
+    hideElement: function (element, classHidden) {
+      document.querySelector(element).classList.add(classHidden);
     },
     removePins: function () {
       var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
@@ -136,11 +144,5 @@
     }
   };
 
-  var disableForm = function () {
-    disableField(adFormFieldsets);
-    disableField(mapFiltersSelects);
-    disableField(mapFiltersFieldests);
-  };
-
-  disableForm();
+  window.map.disableForm();
 }());
