@@ -6,6 +6,10 @@
     mapPinMain: document.querySelector('.map__pin--main'),
     address: window.map.adForm.querySelector('#address'),
     data: false,
+    mapPinMainStartCoords: function () {
+      window.pin.mapPinMain.style.top = window.pin.mapPinMain.offsetTop;
+      window.pin.mapPinMain.style.left = window.pin.mapPinMain.offsetLeft;
+    }
   };
   var mapPinMainSize = {
     width: 65,
@@ -24,11 +28,6 @@
     window.map.showElement('.map', 'map--faded');
     window.map.showElement('.ad-form', 'ad-form--disabled');
     window.map.activateForm();
-  };
-
-  window.mapPinMainStartCoords = function () {
-    window.pin.mapPinMain.style.top = window.pin.mapPinMain.offsetTop;
-    window.pin.mapPinMain.style.left = window.pin.mapPinMain.offsetLeft;
   };
 
   window.pin.address.value = window.pin.mapPinMain.offsetLeft + ',' + window.pin.mapPinMain.offsetTop;

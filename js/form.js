@@ -47,7 +47,7 @@
     window.map.hideElement('.ad-form', 'ad-form--disabled');
     window.map.mapCardRemove();
     window.map.removePins();
-    window.mapPinMainStartCoords();
+    window.pin.mapPinMainStartCoords();
     window.pin.address.value = window.pin.mapPinMain.offsetLeft + ',' + window.pin.mapPinMain.offsetTop;
     window.pin.data = false;
   };
