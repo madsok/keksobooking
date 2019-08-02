@@ -20,12 +20,12 @@
     },
     data: function (data) {
       window.map.renderPins(data.slice(0, PINS_LIMIT));
-      mapFilters.addEventListener('change', function () {
+      mapFilters.addEventListener('change', window.utils.debounce(function () {
         var filteredData = window.filterData(data);
         window.map.removePins();
         window.map.renderPins(filteredData.slice(0, PINS_LIMIT));
         window.map.mapCardRemove();
-      });
+      }));
     },
     renderPins: function (array) {
       var fragment = document.createDocumentFragment();
