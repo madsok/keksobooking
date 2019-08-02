@@ -2,6 +2,7 @@
 
 (function () {
   var ESC_KEYCODE = 27;
+  var DEBOUNCE_INTERVAL = 500;
 
   window.utils = {
     getRandomElement: function (array) {
@@ -16,6 +17,19 @@
       if (evt.keyCode === ESC_KEYCODE) {
         cbfunc();
       }
+    },
+
+    debounce: function (cbfunc) {
+      var lastTimeout = null;
+      return function () {
+        var args = arguments;
+        if (lastTimeout) {
+          window.clearTimeout(lastTimeout);
+        }
+        lastTimeout = window.setTimeout(function () {
+          cbfunc.apply(null, args);
+        }, DEBOUNCE_INTERVAL);
+      };
     }
   };
 }());
