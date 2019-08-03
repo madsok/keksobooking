@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-
+  var MAP_PIN_MAIN_AFTER_HEIGHT = 14;
   window.pin = {
     mapPinMain: document.querySelector('.map__pin--main'),
     address: window.map.adForm.querySelector('#address'),
@@ -15,7 +15,6 @@
     width: 65,
     height: 65
   };
-  var mapPinMainAfterHeight = 14;
 
   var limits = {
     top: 130,
@@ -69,15 +68,15 @@
         mapPinMainCoords.x = limits.right - mapPinMainSize.width;
       }
 
-      if (mapPinMainCoords.y < limits.top - mapPinMainSize.height - mapPinMainAfterHeight) {
-        mapPinMainCoords.y = limits.top - mapPinMainSize.height - mapPinMainAfterHeight;
-      } else if (mapPinMainCoords.y > limits.bottom - mapPinMainSize.height - mapPinMainAfterHeight) {
-        mapPinMainCoords.y = limits.bottom - mapPinMainSize.height - mapPinMainAfterHeight;
+      if (mapPinMainCoords.y < limits.top - mapPinMainSize.height - MAP_PIN_MAIN_AFTER_HEIGHT) {
+        mapPinMainCoords.y = limits.top - mapPinMainSize.height - MAP_PIN_MAIN_AFTER_HEIGHT;
+      } else if (mapPinMainCoords.y > limits.bottom - mapPinMainSize.height - MAP_PIN_MAIN_AFTER_HEIGHT) {
+        mapPinMainCoords.y = limits.bottom - mapPinMainSize.height - MAP_PIN_MAIN_AFTER_HEIGHT;
       }
 
       var mapPinMainAfterCoords = {
         x: mapPinMainCoords.x + Math.round(mapPinMainSize.width / 2),
-        y: mapPinMainCoords.y + mapPinMainSize.height + mapPinMainAfterHeight
+        y: mapPinMainCoords.y + mapPinMainSize.height + MAP_PIN_MAIN_AFTER_HEIGHT
       };
 
       window.pin.mapPinMain.style.left = mapPinMainCoords.x + 'px';
